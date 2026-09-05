@@ -4,14 +4,17 @@ import { serviceManager } from "./ApiService";
 
 function ServiceManager() {
   const [services, setServices] = useState([
-    { name: "", duration_minutes: "" },
+    { name: "", service_price: "", duration_minutes: "" },
   ]);
 
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleAddService = () => {
-    setServices((prev) => [...prev, { name: "", duration_minutes: "" }]);
+    setServices((prev) => [
+      ...prev,
+      { name: "", service_price: "", duration_minutes: "" },
+    ]);
   };
 
   const handleRemoveService = (index) => {
@@ -50,7 +53,7 @@ function ServiceManager() {
       if (response.status === "success") {
         setMessage("Services saved successfully.");
 
-        setServices([{ name: "", duration_minutes: "" }]);
+        setServices([{ name: "", service_price: "", duration_minutes: "" }]);
       } else {
         setMessage(response.message || "Failed to save services.");
       }
@@ -91,6 +94,21 @@ function ServiceManager() {
                   value={service.name}
                   required
                   onChange={(e) => handleChange(index, "name", e.target.value)}
+                />
+              </div>
+
+              <div className="service-field-group">
+                <label className="form-label">Price (£)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  className="form-control"
+                  value={service.service_price}
+                  placeholder="0.00"
+                  onChange={(e) =>
+                    handleChange(index, "service_price", e.target.value)
+                  }
                 />
               </div>
 
