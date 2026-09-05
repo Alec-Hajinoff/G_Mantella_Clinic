@@ -35,7 +35,7 @@ $is_staff = false;
 
 if ($user_role !== null) {
 
-    $allowed_roles = ['owner', 'admin', 'mechanic'];
+    $allowed_roles = ['owner', 'admin'];
     if (in_array(strtolower($user_role), $allowed_roles, true)) {
         $is_staff = true;
     }

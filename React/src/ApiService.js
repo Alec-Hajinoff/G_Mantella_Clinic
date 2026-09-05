@@ -415,7 +415,7 @@ export const customerDeleteAccount = async () => {
   }
 };
 
-// adminBookingsList() fetchs all garage bookings for Owner/Admin/Mechanic roles
+// adminBookingsList() fetchs all garage bookings for Owner/Admin roles
 
 export const adminBookingsList = async () => {
   try {
