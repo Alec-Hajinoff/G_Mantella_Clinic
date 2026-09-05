@@ -1,63 +1,72 @@
-# Auto Repair Business – Web Application
+## G. Mantella Body Piercing Clinic
 
-A full-stack portfolio web application project for an auto repair business, designed to modernise customer interactions and streamline internal operations.
+A modern, responsive full-stack web application for G. Mantella Body Piercing Clinic, combining a public-facing clinic website, online appointment booking, e-commerce, client account management, and a secure staff administration area.
 
-## 🚀 Overview
+# Technology Stack
 
-This application provides a digital solution for an automotive repair business, combining a customer-facing website with an admin dashboard. It enables users to browse services, book appointments, and make secure payments, while giving the business real-time visibility into bookings and revenue.
+- Frontend: React, Bootstrap, CSS
+- Backend: PHP
+- Database: MySQL
 
-## 🛠️ Tech Stack
+# Application Areas
 
-- **Frontend:** React, CSS, Bootstrap
-- **Backend:** PHP
-- **Database:** MySQL
-- **APIs & Integrations:**
-  - DVLA Vehicle Enquiry API
-  - Stripe (payments)
-  - PHPMailer (email notifications)
+The application is designed around three distinct areas:
 
-## ✨ Features
+# Public Application
 
-### Customer-Facing
+Open to visitors without requiring an account. Users can:
 
-- Business profile (contact details, address, certifications, images)
-- Product and service listings
-- Appointment booking with time-slot selection
-- Vehicle lookup via DVLA API
-- Automated email confirmations
-- Secure online payments via Stripe
+- Browse clinic information, services, pricing and policies
+- View studio hygiene standards and staff credentials
+- Find location and contact information
+- Explore an interactive ear and body piercing placement map
+- Browse and purchase jewellery and aftercare products
+- Use Guest Checkout for e-commerce purchases
+- Make online appointment bookings
 
-### Admin Dashboard
+# Client Dashboard
 
-- Revenue tracking and analytics
-- Upcoming appointments overview
-- Top-selling products and services
-- Availability management
-- Customer notes and schedule tracking
+Authenticated clients will be able to:
 
-## 📅 Booking System
+- Manage upcoming appointments
+- View previous appointments and piercing history
+- View order history and order status
+- Manage their account information
+- Access relevant consent and aftercare information
 
-Users can:
+# Admin Dashboard
 
-- Select available time slots via an interactive calendar
-- Enter vehicle registration for automatic lookup
-- Receive instant email confirmation upon booking
+A secure, staff-only area for managing key clinic operations, including:
 
-## 💳 Payments
+- Appointment calendars and bookings
+- Client piercing records
+- E-commerce products and inventory
+- Order management
+- Relevant service and placement information
+- Aftercare communications and workflows
 
-Integrated with Stripe to allow:
+## Core Features
 
-- Secure checkout for services and products
-- Seamless payment experience for customers
+# Hybrid Online Booking
 
-## 📊 Dashboard Insights
+An online reservation system allowing clients to book appointments and pay a deposit, while preserving the clinic's traditional walk-in availability.
 
-The admin interface provides:
+# E-Commerce
 
-- Total revenue tracking
-- Booking trends and upcoming schedules
-- Performance insights on services and products
+An integrated storefront selling items such as aftercare saline sprays, implant-grade jewellery, replacement components and digital gift cards, with Guest Checkout supported.
 
-## 👤 Author
+# Digital Consent & Age Verification
 
-Developed by Alec Hajinoff as part of a portfolio showcasing full-stack web development capabilities.
+Clients can complete required liability waivers, medical history disclosures and online age acknowledgements before their appointment. Where applicable, physical photographic ID will still be checked in person at the clinic.
+
+# Interactive Placement Map
+
+A visual, clickable ear and body placement map providing information such as starting prices, estimated healing times, pain ratings and compatible jewellery.
+
+# Automated Aftercare
+
+Completed piercing services can trigger automated, piercing-specific aftercare communications, including cleaning guidance, healing information and reminders to arrange jewellery downsizing approximately 4–6 weeks after piercing where appropriate.
+
+## Project Status
+
+The application is currently in its initial development phase. Detailed application flows, database architecture, API structure, authentication implementation and individual feature specifications will be defined progressively as development advances.
