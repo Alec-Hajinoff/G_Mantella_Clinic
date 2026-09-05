@@ -1,4 +1,4 @@
-## G. Mantella Body Piercing Clinic
+# G. Mantella Body Piercing Clinic
 
 A modern, responsive full-stack web application for G. Mantella Body Piercing Clinic, combining a public-facing clinic website, online appointment booking, e-commerce, client account management, and a secure staff administration area.
 
@@ -45,7 +45,7 @@ A secure, staff-only area for managing key clinic operations, including:
 - Relevant service and placement information
 - Aftercare communications and workflows
 
-## Core Features
+# Core Features
 
 # Hybrid Online Booking
 
@@ -67,6 +67,6 @@ A visual, clickable ear and body placement map providing information such as sta
 
 Completed piercing services can trigger automated, piercing-specific aftercare communications, including cleaning guidance, healing information and reminders to arrange jewellery downsizing approximately 4–6 weeks after piercing where appropriate.
 
-## Project Status
+# Project Status
 
 The application is currently in its initial development phase. Detailed application flows, database architecture, API structure, authentication implementation and individual feature specifications will be defined progressively as development advances.
