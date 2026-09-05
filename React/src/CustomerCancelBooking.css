@@ -1,0 +1,62 @@
+.cancel-booking-container {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-cancel-initial {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.btn-cancel-initial:hover {
+  background-color: #bb2d3b;
+}
+
+.cancel-confirm-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffe69c;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+}
+
+.cancel-confirm-text {
+  font-size: 0.825rem;
+  color: #664d03;
+  margin: 0;
+}
+
+.btn-confirm-cancel {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-confirm-cancel:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-abort-cancel {
+  background-color: #6c757d;
+  color: #ffffff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}

@@ -1,0 +1,14 @@
+.basket-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--color-text-inverse);
+  text-decoration: none;
+}
+
+.basket-btn:hover {
+  color: var(--color-text-inverse);
+  text-decoration: underline;
+}

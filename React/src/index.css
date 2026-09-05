@@ -1,0 +1,194 @@
+:root {
+  /* ==========================================================================
+     1. TYPOGRAPHY (Universal System Stack)
+     ========================================================================== */
+  --font-family-base:
+    Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-heading:
+    Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --font-size-xs: 0.75rem; /* 12px - Badges, captions, small table data */
+  --font-size-sm: 0.875rem; /* 14px - Secondary text, form helper text */
+  --font-size-md: 1rem; /* 16px - Base body text, inputs, buttons */
+  --font-size-lg: 1.125rem; /* 18px - Subtitles, card titles */
+  --font-size-xl: 1.5rem; /* 24px - Section headers */
+  --font-size-2xl: 2rem; /* 32px - Metric numbers, page titles */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-base: 1.5;
+
+  /* ==========================================================================
+     2. COLOR PALETTE (Amber Base & Royal Blue Complementary)
+     ========================================================================== */
+
+  /* --- Primary Brand & Main Action (Amber / #F59E0B) --- */
+  --color-primary: #f59e0b; /* High-priority CTAs, "Book Appointment", "Pay Now" */
+  --color-primary-shade: #d97706; /* Button hover/active states, focused input borders */
+  --color-primary-tint: #fef3c7; /* Highlight background for active rows or selected slots */
+
+  /* --- Complementary Structure & Contrast (Royal Blue / #0B62F5) --- */
+  --color-complementary: #0b62f5; /* Navigation bar, secondary buttons, key dashboard metrics */
+  --color-complementary-shade: #1d4ed8; /* Hover state for blue buttons, table header background */
+  --color-complementary-tint: #eff6ff; /* Info banners, vehicle enquiry result cards */
+
+  /* --- Neutral Surfaces & Borders --- */
+  --color-surface-bg: #f8fafc; /* Main application background */
+  --color-surface-card: #ffffff; /* Card panels, modal container boxes */
+  --color-border: #e2e8f0; /* Table dividers, card borders */
+  --color-border-input: #cbd5e1; /* Input outlines */
+
+  /* --- Text Colors --- */
+  --color-text-main: #0f172a; /* Dark Slate - Primary headings, body copy */
+  --color-text-muted: #475569; /* Muted Slate - Captions, form helper text */
+  --color-text-inverse: #ffffff; /* Text rendered on top of dark blue elements */
+
+  /* --- Dashboard & Status Indicators --- */
+  --color-success: #10b981; /* Paid status, confirmed bookings */
+  --color-success-bg: #ecfdf5; /* Success badge background */
+  --color-warning: #f59e0b; /* Pending slot, action required */
+  --color-warning-bg: #fffbeb; /* Warning badge background */
+  --color-danger: #ef4444; /* Cancelled slot, validation error */
+  --color-danger-bg: #fef2f2; /* Danger badge background */
+
+  /* ==========================================================================
+     3. BUTTON SPECIFIC VARIABLES
+     ========================================================================== */
+  --btn-bg-primary: var(--color-primary);
+  --btn-bg-primary-hover: var(--color-primary-shade);
+  --btn-text-primary: var(--color-text-main);
+
+  --btn-bg-secondary: var(--color-complementary);
+  --btn-bg-secondary-hover: var(--color-complementary-shade);
+  --btn-text-secondary: var(--color-text-inverse);
+
+  --btn-radius: var(--radius-md);
+  --btn-padding-y: 0.75rem; /* 12px */
+  --btn-padding-x: 1.5rem; /* 24px */
+
+  /* ==========================================================================
+     4. TRANSITION SPEEDS & EASING
+     ========================================================================== */
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --transition-fast: 150ms var(--easing-standard); /* Hover states, active clicks */
+  --transition-normal: 250ms var(--easing-standard); /* Dropdowns, accordions, tabs */
+  --transition-slow: 400ms var(--easing-standard); /* Modals, off-canvas drawers */
+
+  /* ==========================================================================
+     5. Z-INDEX HIERARCHY
+     ========================================================================== */
+  --z-negative: -1; /* Behind page content */
+  --z-normal: 1; /* Regular stacked elements */
+  --z-dropdown: 100; /* Autocomplete list, calendar slot selection picker */
+  --z-sticky: 500; /* Top navigation bar */
+  --z-modal-backdrop: 900; /* Modal backdrop overlay */
+  --z-modal: 1000; /* Stripe checkout modal, appointment confirmation dialog */
+  --z-toast: 1100; /* Toast notifications */
+
+  /* ==========================================================================
+     6. SPACING, RADII & ELEVATION
+     ========================================================================== */
+  --spacing-xs: 0.25rem; /* 4px */
+  --spacing-sm: 0.5rem; /* 8px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2.5rem; /* 40px */
+
+  --radius-sm: 4px; /* Small input controls, badges */
+  --radius-md: 8px; /* Standard buttons, cards */
+  --radius-lg: 12px; /* Modals, dashboard widgets */
+  --radius-pill: 9999px; /* Pill tags */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   GLOBAL RESETS & BASE STYLES
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  color: var(--color-text-main);
+  background-color: var(--color-surface-bg);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Base Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-main);
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   RE-USABLE COMPONENT STYLES
+   ========================================================================== */
+
+/* Primary CTA Button (Amber) */
+.btn-primary-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn-bg-primary);
+  color: var(--btn-text-primary);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn-primary-custom:hover {
+  background-color: var(--btn-bg-primary-hover);
+}
+
+.btn-primary-custom:active {
+  transform: translateY(1px);
+}
+
+/* Secondary Button (Royal Blue) */
+.btn-secondary-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn-bg-secondary);
+  color: var(--btn-text-secondary);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.btn-secondary-custom:hover {
+  background-color: var(--btn-bg-secondary-hover);
+}

@@ -1,0 +1,26 @@
+.navigation-bar-wrapper {
+  background-color: var(--color-complementary);
+  padding: 1rem 0;
+  margin-bottom: 3rem;
+
+  box-shadow: 0 15px 12px -1px rgba(11, 98, 245, 0.25);
+
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.navigation-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-bar-link {
+  color: var(--color-text-inverse);
+  text-decoration: none;
+}
+
+.nav-bar-link:hover,
+.nav-bar-link.active {
+  text-decoration: underline;
+}

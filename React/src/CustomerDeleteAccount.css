@@ -1,0 +1,78 @@
+.delete-account-card {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+  border-radius: 8px;
+}
+
+.delete-account-header h5 {
+  margin: 0 0 0.5rem 0;
+  color: #721c24;
+}
+
+.delete-account-header p {
+  margin: 0 0 1rem 0;
+  font-size: 0.875rem;
+  color: #842029;
+}
+
+.btn-delete-initial {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.btn-delete-initial:hover {
+  background-color: #b02a37;
+}
+
+.delete-confirm-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.delete-confirm-box span {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #842029;
+}
+
+.btn-confirm-delete {
+  background-color: #842029;
+  color: #ffffff;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-confirm-delete:hover {
+  background-color: #5c161d;
+}
+
+.btn-confirm-delete:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-abort-delete {
+  background-color: #6c757d;
+  color: #ffffff;
+  border: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn-abort-delete:hover {
+  background-color: #5c636a;
+}

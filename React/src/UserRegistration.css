@@ -1,0 +1,50 @@
+.auth-page-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.user-registration-wrapper {
+  width: 100%;
+}
+
+.user-registration-wrapper .btn-secondary {
+  background-color: var(--btn-bg-secondary);
+  border: 1px solid transparent;
+  color: var(--btn-text-secondary);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-registration-wrapper .btn-secondary:hover {
+  background-color: var(--btn-bg-secondary-hover);
+}
+
+#success-message {
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#error-message {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#spinnerRegister {
+  margin-left: 0.5rem;
+  color: var(--btn-text-secondary);
+}

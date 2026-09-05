@@ -1,0 +1,23 @@
+#logo {
+  width: 250px;
+}
+
+.header-wrapper {
+  background-color: var(--color-complementary);
+  padding: 1rem 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.header-wrapper .btn-text,
+.header-wrapper a {
+  color: var(--color-text-inverse);
+  text-decoration: none;
+}
+
+.header-wrapper .btn-text:hover,
+.header-wrapper a:hover,
+.header-wrapper .btn-text.active,
+.header-wrapper a.active {
+  text-decoration: underline;
+}

@@ -1,0 +1,76 @@
+.auth-page-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.user-login-wrapper {
+  width: 100%;
+}
+
+.user-login-wrapper .btn-secondary {
+  background-color: var(--btn-bg-secondary);
+  border: 1px solid transparent;
+  color: var(--btn-text-secondary);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-login-wrapper .btn-secondary:hover {
+  background-color: var(--btn-bg-secondary-hover);
+}
+
+.error-message {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.reset-message {
+  color: var(--color-success);
+  font-size: var(--font-size-sm);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.forgot-password-link-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.forgot-password-link {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 5px;
+  color: var(--color-text-main);
+}
+
+.forgot-password-link:hover {
+  color: var(--btn-bg-secondary-hover);
+  text-decoration: none;
+}
+
+.forgot-password-link:disabled {
+  color: #999;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+#spinnerReset {
+  margin-left: 8px;
+  color: var(--color-complementary);
+}

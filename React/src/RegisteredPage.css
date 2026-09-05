@@ -1,0 +1,13 @@
+.registered-section-divider {
+  background-color: var(--color-primary-50);
+  border-radius: 5px;
+  padding: 15px;
+
+  font-weight: 500;
+  margin-top: 35px;
+}
+
+.registered-page-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}

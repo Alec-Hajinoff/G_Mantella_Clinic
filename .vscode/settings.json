@@ -1,0 +1,48 @@
+{
+  "php.version": "8.2",
+
+  // Zencoder lockdown
+  "zencoder.enableRepoIndexing": false,
+  "zencoder.shellTool.commandConfirmationPolicy": "doNotAskForSpecified",
+  "zencoder.enableCodeLenses": false,
+  "zencoder.enableShellTool": false,
+  "zencoder.inlineSuggestions.enable": false,
+
+  // GitHub Copilot lockdown
+  "github.copilot.enable": {
+    "*": false
+  },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.editor.enableAutoCompletions": false,
+
+  // CodeGeeX lockdown
+  "codegeex.enableInlineCompletion": false,
+  "codegeex.enableAutoCompletion": false,
+
+  // Windsurf lockdown
+  "windsurf.inline.enabled": false,
+  "windsurf.autoComplete.enabled": false,
+
+  // AMP lockdown
+  "amp.inlineSuggestions.enabled": false,
+  "amp.autoInsert.enabled": false,
+  "amp.codeActions.enabled": false,
+  "amp.applyEdits.enabled": false,
+
+  // Global editor lockdown
+  "editor.inlineSuggest.enabled": false,
+  "editor.quickSuggestions": {
+    "other": false,
+    "comments": false,
+    "strings": false
+  },
+  "editor.suggest.showWords": false,
+  "zencoder.codeCompletion.enable": false,
+  "zencoder.codeCompletion.enableMultiLine": false,
+  "Codegeex.GenerationPreference": "automatic",
+  "Codegeex.CommitMessage.LanguagePreference": "English",
+  "Codegeex.Chat.LanguagePreference": "English",
+  "Codegeex.Comment.LanguagePreference": "English",
+  "Codegeex.SidebarUI.LanguagePreference": "English"
+}

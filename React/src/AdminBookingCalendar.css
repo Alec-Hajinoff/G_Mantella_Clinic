@@ -1,0 +1,81 @@
+.admin-booking-calendar-container {
+  margin: 1.5rem 0;
+}
+
+.admin-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.admin-calendar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 5px solid var(--color-primary, #f59e0b);
+}
+
+.admin-calendar-table th,
+.admin-calendar-table td {
+  border: 1px solid var(--color-primary, #f59e0b);
+  text-align: center;
+  padding: 0.5rem;
+  vertical-align: middle;
+}
+
+.admin-slot-btn {
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  transition:
+    background-color var(--transition-fast, 150ms ease),
+    border-color var(--transition-fast, 150ms ease);
+}
+
+.admin-slot-available {
+  background-color: transparent;
+  color: var(--color-complementary, #0b62f5);
+  border: 1px solid var(--color-complementary, #0b62f5);
+}
+
+.admin-slot-available:hover {
+  background-color: var(--color-complementary-shade, #1d4ed8);
+  border-color: var(--color-complementary-shade, #1d4ed8);
+  color: var(--color-text-inverse, #ffffff);
+}
+
+.admin-slot-selected {
+  background-color: var(--color-complementary, #0b62f5);
+  border: 1px solid var(--color-complementary, #0b62f5);
+  color: var(--color-text-inverse, #ffffff);
+}
+
+.admin-slot-selected:hover {
+  background-color: var(--color-complementary-shade, #1d4ed8);
+  border-color: var(--color-complementary-shade, #1d4ed8);
+  color: var(--color-text-inverse, #ffffff);
+}
+
+.admin-slot-blocked {
+  background-color: var(--color-danger-bg, #fef2f2);
+  color: var(--color-danger, #ef4444);
+  border: 1px solid var(--color-danger, #ef4444);
+}
+
+.admin-slot-blocked:hover {
+  background-color: var(--color-danger, #ef4444);
+  border-color: var(--color-danger, #ef4444);
+  color: var(--color-text-inverse, #ffffff);
+}
+
+.admin-slot-booked {
+  color: #6c757d;
+  font-style: italic;
+  font-size: 0.85rem;
+}

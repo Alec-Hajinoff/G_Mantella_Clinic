@@ -1,0 +1,48 @@
+Welcome to Climate Bind docs contributing guide
+
+Thank you for investing your time in contributing to our project!
+
+In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
+
+# New contributor guide
+
+To get an overview of the project, read the README.md file. Please email us at team@climatebind.com for a list of features that we are working on.
+
+# Create a new issue
+
+If you spot a problem with the docs you can open a new issue.
+
+# Solve an issue
+
+As a general rule, we don’t assign issues to anyone. If you find an issue to work on, you are welcome to open a PR with a fix.
+
+# Make changes locally
+
+1. Fork the repository.
+
+- Using GitHub Desktop:
+  - Getting started with GitHub Desktop (https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting     up Desktop.
+  - Once Desktop is set up, you can use it to fork the repo!
+
+- Using the command line:
+  - Fork the repo (https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#fork-an-example-repository) so that you can make your changes without affecting the original     project until you're ready to merge them.
+
+2. Create a working branch and start with your changes!
+
+# Commit your update
+
+Commit the changes once you are happy with them. Don't forget to use the Self review checklist (https://docs.github.com/en/contributing/collaborating-on-github-docs/self-review-checklist) to speed up the review process.
+
+# Pull Request
+
+When you're finished with the changes, create a pull request, also known as a PR.
+
+Once you submit your PR, a team member will review your proposal. We may ask questions or request additional information.
+
+- We may ask for changes to be made before a PR can be merged.
+
+- If you run into any merge issues, checkout this  git tutorial (https://github.com/skills/resolve-merge-conflicts) to help you resolve merge conflicts and other issues.
+
+# Your PR is merged!
+
+Our team thanks you!

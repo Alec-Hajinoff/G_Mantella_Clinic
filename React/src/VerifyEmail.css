@@ -1,0 +1,29 @@
+.verify-email-container {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.verify-email-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.verify-email-container .btn-secondary {
+  background-color: var(--btn-bg);
+  border: 1px solid var(--btn-border);
+  color: var(--btn-text);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: var(--btn-transition);
+}
+
+.verify-email-container .btn-secondary:hover {
+  background-color: var(--btn-bg-hover);
+}
+
+.verify-email-container .button-wrapper {
+  margin-top: 1rem;
+}

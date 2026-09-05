@@ -1,0 +1,64 @@
+/* ProductCard.css */
+
+.product-card {
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-card);
+}
+
+.product-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+.product-card-img-container {
+  height: 180px;
+  overflow: hidden;
+  background-color: var(--color-surface-bg);
+}
+
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
+.product-card-no-image {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.product-card-title {
+  color: var(--color-text-main);
+  font-family: var(--font-family-heading);
+}
+
+.product-card-description {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.product-card-price {
+  color: var(--color-success);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.product-card-add-btn {
+  border-color: var(--color-complementary);
+  color: var(--color-complementary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.product-card-add-btn:hover {
+  background-color: var(--color-complementary);
+  color: var(--color-text-inverse);
+}

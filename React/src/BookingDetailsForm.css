@@ -1,0 +1,11 @@
+.booking-details-form {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 5px solid var(--color-primary, #f59e0b);
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.booking-form-group {
+  margin-bottom: 0.75rem;
+}
