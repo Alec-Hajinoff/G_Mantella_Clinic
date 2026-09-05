@@ -43,7 +43,7 @@ try {
         PDO::ATTR_EMULATE_PREPARES   => false,
     ]);
 
-    $stmt     = $pdo->query('SELECT id, name, duration_minutes FROM services ORDER BY name ASC');
+    $stmt     = $pdo->query('SELECT id, name, service_price, duration_minutes FROM services ORDER BY name ASC');
     $services = $stmt->fetchAll();
 
     $user_stmt = $pdo->prepare('SELECT first_name, surname, phone FROM users WHERE id = :user_id');

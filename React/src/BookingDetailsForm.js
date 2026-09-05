@@ -114,6 +114,11 @@ function BookingDetailsForm({ onConfirm, submitting }) {
           {services.map((service) => (
             <option key={service.id} value={service.id}>
               {service.name}{" "}
+              {service.service_price !== null &&
+              service.service_price !== undefined &&
+              service.service_price !== ""
+                ? `- £${parseFloat(service.service_price).toFixed(2)} `
+                : ""}
               {service.duration_minutes
                 ? `(${service.duration_minutes} mins)`
                 : ""}
@@ -124,6 +129,9 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         {selectedService && selectedService.duration_minutes && (
           <small className="text-muted mt-1 d-block">
             Estimated duration: {selectedService.duration_minutes} minutes
+            {/* Display selected price summary below option list if applicable */}
+            {selectedService.service_price &&
+              ` | Price: £${parseFloat(selectedService.service_price).toFixed(2)}`}
           </small>
         )}
       </div>
