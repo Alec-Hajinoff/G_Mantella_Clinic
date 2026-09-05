@@ -3,7 +3,7 @@
 export const registerUser = async (formData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/form_capture.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/form_capture.php",
       {
         method: "POST",
         headers: {
@@ -25,7 +25,7 @@ export const registerUser = async (formData) => {
 export const loginUser = async (formData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/login_capture.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/login_capture.php",
       {
         method: "POST",
         headers: {
@@ -47,7 +47,7 @@ export const loginUser = async (formData) => {
 export const logoutUser = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/logout_component.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/logout_component.php",
       {
         method: "POST",
         credentials: "include",
@@ -68,7 +68,7 @@ export const logoutUser = async () => {
 export const verifyEmail = async (token) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/verify_email.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/verify_email.php",
       {
         method: "POST",
         headers: {
@@ -92,7 +92,7 @@ export const verifyEmail = async (token) => {
 export const passwordResetLink = async (email) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/password_reset_link.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/password_reset_link.php",
       {
         method: "POST",
         headers: {
@@ -117,7 +117,7 @@ export const passwordResetLink = async (email) => {
 export const passwordResetToken = async (token) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/password_reset_token.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/password_reset_token.php",
       {
         method: "POST",
         headers: {
@@ -144,7 +144,7 @@ export const passwordResetToken = async (token) => {
 export const updatePassword = async (token, newPassword) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/update_password.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/update_password.php",
       {
         method: "POST",
         headers: {
@@ -174,7 +174,7 @@ export const updatePassword = async (token, newPassword) => {
 export const checkSession = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/check_session.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/check_session.php",
       {
         method: "GET",
         credentials: "include",
@@ -194,7 +194,7 @@ export const checkSession = async () => {
 export const businessHoursManager = async (businessHoursData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/business_hours_manager.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/business_hours_manager.php",
       {
         method: "POST",
         headers: {
@@ -218,7 +218,7 @@ export const businessHoursManager = async (businessHoursData) => {
 export const bookingCalendar = async (startDate, endDate) => {
   try {
     const response = await fetch(
-      `http://localhost:8001/Loveday_Auto/PHP/booking_calendar.php?start_date=${startDate}&end_date=${endDate}`,
+      `http://localhost:8001/G_Mantella_Clinic/PHP/booking_calendar.php?start_date=${startDate}&end_date=${endDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -238,7 +238,7 @@ export const bookingCalendar = async (startDate, endDate) => {
 export const selectedAppointmentSlot = async (bookingData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/selected_appointment_slot.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/selected_appointment_slot.php",
       {
         method: "POST",
         headers: {
@@ -262,7 +262,7 @@ export const selectedAppointmentSlot = async (bookingData) => {
 export const serviceManager = async (servicesData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/service_manager.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/service_manager.php",
       {
         method: "POST",
         headers: {
@@ -286,7 +286,7 @@ export const serviceManager = async (servicesData) => {
 export const bookingDetailsForm = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/booking_details_form.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/booking_details_form.php",
       {
         method: "GET",
         credentials: "include",
@@ -306,7 +306,7 @@ export const bookingDetailsForm = async () => {
 export const customerBookingsList = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/customer_bookings_list.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/customer_bookings_list.php",
       {
         method: "GET",
         headers: {
@@ -329,7 +329,7 @@ export const customerBookingsList = async () => {
 export const customerCancelBooking = async (appointmentId) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/customer_cancel_booking.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/customer_cancel_booking.php",
       {
         method: "POST",
         headers: {
@@ -353,7 +353,7 @@ export const customerCancelBooking = async (appointmentId) => {
 export const customerProfileGet = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/customer_profile_get.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/customer_profile_get.php",
       {
         method: "GET",
         credentials: "include",
@@ -373,7 +373,7 @@ export const customerProfileGet = async () => {
 export const customerProfilePost = async (profileData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/customer_profile_post.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/customer_profile_post.php",
       {
         method: "POST",
         headers: {
@@ -397,7 +397,7 @@ export const customerProfilePost = async (profileData) => {
 export const customerDeleteAccount = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/customer_delete_account.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/customer_delete_account.php",
       {
         method: "POST",
         headers: {
@@ -420,7 +420,7 @@ export const customerDeleteAccount = async () => {
 export const adminBookingsList = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/admin_bookings_list.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/admin_bookings_list.php",
       {
         method: "GET",
         headers: {
@@ -443,7 +443,7 @@ export const adminBookingsList = async () => {
 export const adminCancelBooking = async (appointmentId) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/admin_cancel_booking.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/admin_cancel_booking.php",
       {
         method: "POST",
         headers: {
@@ -467,7 +467,7 @@ export const adminCancelBooking = async (appointmentId) => {
 export const adminBookingCalendar = async (startDate, endDate) => {
   try {
     const response = await fetch(
-      `http://localhost:8001/Loveday_Auto/PHP/admin_booking_calendar.php?start_date=${startDate}&end_date=${endDate}`,
+      `http://localhost:8001/G_Mantella_Clinic/PHP/admin_booking_calendar.php?start_date=${startDate}&end_date=${endDate}`,
       {
         method: "GET",
         credentials: "include",
@@ -487,7 +487,7 @@ export const adminBookingCalendar = async (startDate, endDate) => {
 export const blockUnblockActionBar = async (slotIds, action = null) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/block_unblock_action_bar.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/block_unblock_action_bar.php",
       {
         method: "POST",
         headers: {
@@ -514,7 +514,7 @@ export const blockUnblockActionBar = async (slotIds, action = null) => {
 export const availabilityHorizonExtender = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/availability_horizon_extender.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/availability_horizon_extender.php",
       {
         method: "POST",
         headers: {
@@ -537,7 +537,7 @@ export const availabilityHorizonExtender = async () => {
 export const adminProductEntry = async (formData) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/admin_product_entry.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/admin_product_entry.php",
       {
         method: "POST",
         credentials: "include",
@@ -558,7 +558,7 @@ export const adminProductEntry = async (formData) => {
 export const productCatalogueGet = async () => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/product_catalogue_get.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/product_catalogue_get.php",
       {
         method: "GET",
         credentials: "include",
@@ -578,7 +578,7 @@ export const productCatalogueGet = async () => {
 export const productCataloguePost = async (stripePriceId, quantity) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/product_catalogue_post.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/product_catalogue_post.php",
       {
         method: "POST",
         headers: {
@@ -605,7 +605,7 @@ export const productCataloguePost = async (stripePriceId, quantity) => {
 export const checkoutSessionCreate = async (checkoutPayload) => {
   try {
     const response = await fetch(
-      "http://localhost:8001/Loveday_Auto/PHP/product_catalogue_post.php",
+      "http://localhost:8001/G_Mantella_Clinic/PHP/product_catalogue_post.php",
       {
         method: "POST",
         headers: {
