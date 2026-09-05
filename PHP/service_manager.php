@@ -44,7 +44,7 @@ if (! isset($input['services']) || ! is_array($input['services']) || empty($inpu
 }
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=loveday_auto', 'root', '', [
+    $pdo = new PDO('mysql:host=localhost;dbname=g_mantella_clinic', 'root', '', [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,

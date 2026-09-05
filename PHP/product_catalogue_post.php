@@ -101,8 +101,8 @@ $fulfillment = $input['fulfillment'] ?? 'collection';
 
 $postData = http_build_query([
     'mode'        => 'payment',
-    'success_url' => $ngrok_domain . '/Loveday_Auto/PHP/success_redirect.php?session_id={CHECKOUT_SESSION_ID}',
-    'cancel_url'  => $ngrok_domain . '/Loveday_Auto/PHP/cancel_redirect.php',
+    'success_url' => $ngrok_domain . '/G_Mantella_Clinic/PHP/success_redirect.php?session_id={CHECKOUT_SESSION_ID}',
+    'cancel_url'  => $ngrok_domain . '/G_Mantella_Clinic/PHP/cancel_redirect.php',
     'ui_mode'     => 'hosted_page',
     'metadata'    => [
         'user_id'              => $user_id,

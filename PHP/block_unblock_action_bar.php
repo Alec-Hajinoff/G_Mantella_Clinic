@@ -54,7 +54,7 @@ if (empty($slot_ids) || ! is_array($slot_ids)) {
 }
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=loveday_auto', 'root', '', [
+    $pdo = new PDO('mysql:host=localhost;dbname=g_mantella_clinic', 'root', '', [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
