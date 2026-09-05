@@ -132,13 +132,13 @@ try {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
-            $mail->setFrom($mailUsername, 'Hertford Standard');
+            $mail->setFrom($mailUsername, 'G. Mantella Body Piercing Clinic');
 
             $mail->addAddress($email);
 
             $mail->isHTML(false);
-            $mail->Subject = 'Verify your email address - Hertford Standard';
-            $mail->Body    = "Thank you for creating an account with Hertford Standard.\n\n"
+            $mail->Subject = 'Verify your email address - G. Mantella Body Piercing Clinic';
+            $mail->Body    = "Thank you for creating an account with G. Mantella Body Piercing Clinic.\n\n"
                 . "Please click the link below to verify your email address:\n"
                 . $verificationLink . "\n\n"
                 . "Once verified, you will be able to sign in to your account.\n\n"
