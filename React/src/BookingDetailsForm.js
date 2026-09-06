@@ -5,7 +5,7 @@ import { bookingDetailsForm } from "./ApiService";
 function BookingDetailsForm({ onConfirm, submitting }) {
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState("");
-  const [vehicleReg, setVehicleReg] = useState("");
+
   const [notes, setNotes] = useState("");
 
   const [firstName, setFirstName] = useState("");
@@ -38,14 +38,9 @@ function BookingDetailsForm({ onConfirm, submitting }) {
     e.preventDefault();
     setErrorMessage("");
 
-    if (!vehicleReg.trim()) {
-      setErrorMessage("Vehicle registration number is required.");
-      return;
-    }
-
     if (!serviceId && !notes.trim()) {
       setErrorMessage(
-        "Please either select a garage service or provide details in the notes section.",
+        "Please either select a service or provide details in the notes section.",
       );
       return;
     }
@@ -67,7 +62,7 @@ function BookingDetailsForm({ onConfirm, submitting }) {
 
     onConfirm({
       service_id: serviceId ? parseInt(serviceId, 10) : null,
-      vehicle_reg: vehicleReg.trim(),
+
       notes: notes.trim() || null,
       first_name: firstName.trim(),
       surname: surname.trim(),
@@ -86,20 +81,6 @@ function BookingDetailsForm({ onConfirm, submitting }) {
       {errorMessage && (
         <div className="alert alert-danger py-2">{errorMessage}</div>
       )}
-
-      <div className="booking-form-group">
-        <label className="form-label fw-bold">
-          Vehicle Registration <span className="text-danger">*</span>
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="e.g. AB12 CDE"
-          value={vehicleReg}
-          onChange={(e) => setVehicleReg(e.target.value)}
-          required
-        />
-      </div>
 
       <div className="booking-form-group">
         <label className="form-label fw-bold">Select Service</label>
@@ -129,7 +110,6 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         {selectedService && selectedService.duration_minutes && (
           <small className="text-muted mt-1 d-block">
             Estimated duration: {selectedService.duration_minutes} minutes
-            {/* Display selected price summary below option list if applicable */}
             {selectedService.service_price &&
               ` | Price: £${parseFloat(selectedService.service_price).toFixed(2)}`}
           </small>
@@ -143,7 +123,7 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         <textarea
           className="form-control"
           rows="2"
-          placeholder="Describe your issue or custom request..."
+          placeholder="Describe your request or piercing placement details..."
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
         />

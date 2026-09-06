@@ -65,19 +65,14 @@ if (! isset($input['slot_ids']) || ! is_array($input['slot_ids']) || empty($inpu
     exit;
 }
 
-$slot_ids    = array_map('intval', $input['slot_ids']);
-$service_id  = isset($input['service_id']) ? (int) $input['service_id'] : null;
-$vehicle_reg = isset($input['vehicle_reg']) ? trim($input['vehicle_reg']) : null;
-$notes       = isset($input['notes']) ? trim($input['notes']) : null;
+$slot_ids   = array_map('intval', $input['slot_ids']);
+$service_id = isset($input['service_id']) ? (int) $input['service_id'] : null;
+
+$notes = isset($input['notes']) ? trim($input['notes']) : null;
 
 $first_name = isset($input['first_name']) ? trim($input['first_name']) : '';
 $surname    = isset($input['surname']) ? trim($input['surname']) : '';
 $phone      = isset($input['phone']) ? trim($input['phone']) : '';
-
-if (empty($vehicle_reg)) {
-    echo json_encode(['status' => 'error', 'message' => 'Vehicle registration is required.']);
-    exit;
-}
 
 if (empty($first_name) || empty($surname) || empty($phone)) {
     echo json_encode(['status' => 'error', 'message' => 'First name, surname, and phone number are required.']);
@@ -124,17 +119,17 @@ try {
     $update_stmt->execute($slot_ids);
 
     $app_stmt = $pdo->prepare('
-        INSERT INTO appointments (user_id, slot_id, service_id, vehicle_reg, notes, created_at, updated_at)
-        VALUES (:user_id, :slot_id, :service_id, :vehicle_reg, :notes, NOW(), NOW())
+        INSERT INTO appointments (user_id, slot_id, service_id, notes, created_at, updated_at)
+        VALUES (:user_id, :slot_id, :service_id, :notes, NOW(), NOW())
     ');
 
     foreach ($slot_ids as $slot_id) {
         $app_stmt->execute([
-            ':user_id'     => $user_id,
-            ':slot_id'     => $slot_id,
-            ':service_id'  => $service_id,
-            ':vehicle_reg' => $vehicle_reg,
-            ':notes'       => $notes,
+            ':user_id'    => $user_id,
+            ':slot_id'    => $slot_id,
+            ':service_id' => $service_id,
+
+            ':notes'      => $notes,
         ]);
     }
 
@@ -163,7 +158,7 @@ try {
         $pdo->rollBack();
         echo json_encode([
             'status'  => 'error',
-            'message' => 'Your booking could not be completed at this time. Please call the garage directly on 01234 567890 to book your appointment.',
+            'message' => 'Your booking could not be completed at this time. Please call the clinic directly to book your appointment.',
         ]);
         exit;
     }
@@ -189,21 +184,22 @@ try {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        $mail->setFrom($mailUsername, 'Hertford Standard Booking System');
+        $mail->setFrom($mailUsername, 'G. Mantella Clinic Booking System');
 
         foreach ($staff_recipients as $recipient_email) {
             $mail->addAddress($recipient_email);
         }
 
         $mail->isHTML(false);
-        $mail->Subject = 'New Booking Alert - ' . $first_name . ' ' . $surname . ' (' . $vehicle_reg . ')';
-        $mail->Body    = "Hello,\n\nA new customer appointment has been booked.\n\n"
-            . "--- CUSTOMER DETAILS ---\n"
+
+        $mail->Subject = 'New Booking Alert - ' . $first_name . ' ' . $surname;
+
+        $mail->Body = "Hello,\n\nA new client appointment has been booked.\n\n"
+            . "--- CLIENT DETAILS ---\n"
             . "Name: {$first_name} {$surname}\n"
             . "Phone: {$phone}\n\n"
             . "--- APPOINTMENT DETAILS ---\n"
             . "Service: {$service_name}\n"
-            . "Vehicle Registration: {$vehicle_reg}\n"
             . "Notes: " . ($notes ? $notes : 'None') . "\n\n"
             . "--- BOOKED SLOTS ---\n"
             . "{$slots_text}\n";
@@ -219,7 +215,7 @@ try {
         error_log('Booking Notification Email Error: ' . $e->getMessage());
         echo json_encode([
             'status'  => 'error',
-            'message' => 'Your booking could not be completed due to a notification error. Please call the garage directly on 01234 567890 to complete your booking.',
+            'message' => 'Your booking could not be completed due to a notification error. Please call the clinic directly to complete your booking.',
         ]);
         exit;
     }
