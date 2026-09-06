@@ -257,27 +257,24 @@ export const selectedAppointmentSlot = async (bookingData) => {
   }
 };
 
-// serviceManager() sends garage services data to the backend
+// serviceManager() posts to Stripe and inserts into the database services entered by admins.
 
-export const serviceManager = async (servicesData) => {
+export const serviceManager = async (formData) => {
   try {
     const response = await fetch(
       "http://localhost:8001/G_Mantella_Clinic/PHP/service_manager.php",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
-        body: JSON.stringify({ services: servicesData }),
+        body: formData,
       },
     );
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error saving services:", error);
-    throw new Error("An error occurred while saving services.");
+    console.error("Error saving service:", error);
+    throw new Error("An error occurred while saving the service.");
   }
 };
 

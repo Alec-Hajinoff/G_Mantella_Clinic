@@ -2,149 +2,173 @@ import React, { useState } from "react";
 import "./ServiceManager.css";
 import { serviceManager } from "./ApiService";
 
-function ServiceManager() {
-  const [services, setServices] = useState([
-    { name: "", service_price: "", duration_minutes: "" },
-  ]);
+function ServiceManager({ onServiceAdded }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    service_price: "",
+    duration_minutes: "",
+  });
 
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState(null);
+  const [status, setStatus] = useState({ type: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleAddService = () => {
-    setServices((prev) => [
-      ...prev,
-      { name: "", service_price: "", duration_minutes: "" },
-    ]);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleRemoveService = (index) => {
-    if (services.length === 1) return;
-    setServices((prev) => prev.filter((_, i) => i !== index));
-  };
-
-  const handleChange = (index, field, value) => {
-    setServices((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, [field]: value } : item)),
-    );
+  const handleFileChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
-
-    const isValid = services.every(
-      (s) =>
-        s.name.trim() !== "" &&
-        s.duration_minutes !== "" &&
-        Number(s.duration_minutes) > 0,
-    );
-
-    if (!isValid) {
-      setMessage(
-        "Please complete all required fields (Name and Duration in minutes).",
-      );
-      return;
-    }
-
-    setLoading(true);
+    setStatus({ type: "", message: "" });
+    setIsSubmitting(true);
 
     try {
-      const response = await serviceManager(services);
-      if (response.status === "success") {
-        setMessage("Services saved successfully.");
+      const dataToSend = new FormData();
+      dataToSend.append("name", formData.name);
+      dataToSend.append("description", formData.description);
+      dataToSend.append("service_price", formData.service_price);
+      dataToSend.append("duration_minutes", formData.duration_minutes);
 
-        setServices([{ name: "", service_price: "", duration_minutes: "" }]);
-      } else {
-        setMessage(response.message || "Failed to save services.");
+      if (imageFile) {
+        dataToSend.append("image", imageFile);
       }
-    } catch (error) {
-      setMessage(error.message);
+
+      const result = await serviceManager(dataToSend);
+
+      if (result.status === "success") {
+        setStatus({ type: "success", message: result.message });
+
+        setFormData({
+          name: "",
+          description: "",
+          service_price: "",
+          duration_minutes: "",
+        });
+        setImageFile(null);
+        e.target.reset();
+        if (onServiceAdded) {
+          onServiceAdded();
+        }
+      } else {
+        setStatus({
+          type: "danger",
+          message: result.message || "Failed to add service.",
+        });
+      }
+    } catch (err) {
+      setStatus({
+        type: "danger",
+        message: "An error occurred while connecting to the server.",
+      });
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="service-manager-container">
-      <h5>Garage Services Manager</h5>
+      <h5>Add New Service</h5>
+
+      {status.message && (
+        <div className={`alert alert-${status.type}`}>{status.message}</div>
+      )}
+
       <form onSubmit={handleSubmit}>
-        {services.map((service, index) => (
-          <div key={index} className="service-card">
-            <div className="service-card-header">
-              <span className="fw-bold">Service #{index + 1}</span>
-              {services.length > 1 && (
-                <button
-                  type="button"
-                  className="btn btn-outline-danger btn-sm"
-                  onClick={() => handleRemoveService(index)}
-                >
-                  Remove
-                </button>
-              )}
-            </div>
-
-            <div className="service-form-row">
-              <div className="service-field-group">
-                <label className="form-label">
-                  Service Name <span className="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={service.name}
-                  required
-                  onChange={(e) => handleChange(index, "name", e.target.value)}
-                />
-              </div>
-
-              <div className="service-field-group">
-                <label className="form-label">Price (£)</label>
-                <input
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  className="form-control"
-                  value={service.service_price}
-                  placeholder="0.00"
-                  onChange={(e) =>
-                    handleChange(index, "service_price", e.target.value)
-                  }
-                />
-              </div>
-
-              <div className="service-field-group">
-                <label className="form-label">
-                  Duration (Minutes) <span className="text-danger">*</span>
-                </label>
-                <input
-                  type="number"
-                  className="form-control"
-                  min="1"
-                  value={service.duration_minutes}
-                  required
-                  onChange={(e) =>
-                    handleChange(index, "duration_minutes", e.target.value)
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        ))}
-
-        <div className="d-flex gap-2 align-items-center mt-3">
-          <button
-            type="button"
-            className="btn btn-outline-secondary"
-            onClick={handleAddService}
-          >
-            + Add Another Service
-          </button>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? "Saving..." : "Save Services"}
-          </button>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Service Name <span className="text-danger">*</span>
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            required
+          />
         </div>
 
-        {message && <div className="mt-3 text-info">{message}</div>}
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            id="description"
+            name="description"
+            rows="3"
+            value={formData.description}
+            onChange={handleInputChange}
+          ></textarea>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="service_price" className="form-label">
+              Price (£ GBP) <span className="text-danger">*</span>
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              min="0"
+              className="form-control"
+              id="service_price"
+              name="service_price"
+              value={formData.service_price}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+
+          <div className="col-md-6 mb-3">
+            <label htmlFor="duration_minutes" className="form-label">
+              Duration (Minutes) <span className="text-danger">*</span>
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="duration_minutes"
+              name="duration_minutes"
+              min="1"
+              value={formData.duration_minutes}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="image" className="form-label">
+            Service Image
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="image"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handleFileChange}
+          />
+          <div className="form-text">
+            Accepted formats: JPEG, PNG, WEBP (Max size: 5MB)
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="btn btn-primary w-100"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Processing..." : "Create Service"}
+        </button>
       </form>
     </div>
   );
