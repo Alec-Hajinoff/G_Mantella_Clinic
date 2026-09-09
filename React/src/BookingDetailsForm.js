@@ -5,6 +5,7 @@ import { bookingDetailsForm } from "./ApiService";
 function BookingDetailsForm({ onConfirm, submitting }) {
   const [services, setServices] = useState([]);
   const [serviceId, setServiceId] = useState("");
+  const [selectedService, setSelectedService] = useState(null);
 
   const [notes, setNotes] = useState("");
 
@@ -34,6 +35,17 @@ function BookingDetailsForm({ onConfirm, submitting }) {
     fetchFormData();
   }, []);
 
+  const handleServiceChange = (e) => {
+    const value = e.target.value;
+    setServiceId(value);
+    if (value) {
+      const service = services.find((s) => s.id === parseInt(value, 10));
+      setSelectedService(service || null);
+    } else {
+      setSelectedService(null);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -60,19 +72,23 @@ function BookingDetailsForm({ onConfirm, submitting }) {
       return;
     }
 
-    onConfirm({
+    const payload = {
       service_id: serviceId ? parseInt(serviceId, 10) : null,
-
+      service_name: selectedService ? selectedService.name : null,
+      service_price: selectedService
+        ? parseFloat(selectedService.service_price)
+        : null,
+      stripe_price_id: selectedService ? selectedService.stripe_price_id : null,
       notes: notes.trim() || null,
       first_name: firstName.trim(),
       surname: surname.trim(),
       phone: phone.trim(),
-    });
+    };
+
+    onConfirm(payload);
   };
 
-  const selectedService = services.find(
-    (s) => s.id === parseInt(serviceId, 10),
-  );
+  const serviceDisplay = services.find((s) => s.id === parseInt(serviceId, 10));
 
   return (
     <form className="booking-details-form" onSubmit={handleSubmit}>
@@ -87,7 +103,7 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         <select
           className="form-select"
           value={serviceId}
-          onChange={(e) => setServiceId(e.target.value)}
+          onChange={handleServiceChange}
         >
           <option value="">
             -- Choose a Service (Optional if notes provided) --
@@ -107,11 +123,11 @@ function BookingDetailsForm({ onConfirm, submitting }) {
           ))}
         </select>
 
-        {selectedService && selectedService.duration_minutes && (
+        {serviceDisplay && serviceDisplay.duration_minutes && (
           <small className="text-muted mt-1 d-block">
-            Estimated duration: {selectedService.duration_minutes} minutes
-            {selectedService.service_price &&
-              ` | Price: £${parseFloat(selectedService.service_price).toFixed(2)}`}
+            Estimated duration: {serviceDisplay.duration_minutes} minutes
+            {serviceDisplay.service_price &&
+              ` | Price: £${parseFloat(serviceDisplay.service_price).toFixed(2)}`}
           </small>
         )}
       </div>
@@ -177,7 +193,7 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         className="btn btn-primary btn-sm mt-2"
         disabled={submitting}
       >
-        {submitting ? "Booking..." : "Confirm Booking"}
+        {submitting ? "Processing..." : "Pay & Confirm Booking"}
       </button>
     </form>
   );

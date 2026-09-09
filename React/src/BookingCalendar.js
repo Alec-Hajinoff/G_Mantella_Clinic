@@ -22,7 +22,7 @@ function BookingCalendar() {
   const [startDate, setStartDate] = useState(new Date());
   const [slotsData, setSlotsData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [selectedSlots, setSelectedSlots] = useState([]);
+  const [selectedSlot, setSelectedSlot] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -69,7 +69,7 @@ function BookingCalendar() {
   }, [loadCalendarSlots]);
 
   const handlePrevWeek = () => {
-    setSelectedSlots([]);
+    setSelectedSlot(null);
     const prev = new Date(startDate);
     prev.setDate(prev.getDate() - 7);
 
@@ -81,50 +81,45 @@ function BookingCalendar() {
   };
 
   const handleNextWeek = () => {
-    setSelectedSlots([]);
+    setSelectedSlot(null);
     const next = new Date(startDate);
     next.setDate(next.getDate() + 7);
     setStartDate(next);
   };
 
   const handleToday = () => {
-    setSelectedSlots([]);
+    setSelectedSlot(null);
     setStartDate(new Date());
   };
 
   const handleSelectSlot = (slot) => {
-    setSelectedSlots((prev) => {
-      const exists = prev.some((s) => s.id === slot.id);
-      if (exists) {
-        return prev.filter((s) => s.id !== slot.id);
-      } else {
-        return [...prev, slot];
-      }
-    });
+    if (selectedSlot && selectedSlot.id === slot.id) {
+      setSelectedSlot(null);
+    } else {
+      setSelectedSlot(slot);
+    }
   };
 
   const handleConfirmBooking = async (details) => {
-    if (selectedSlots.length === 0) return;
+    if (!selectedSlot) return;
 
     setSubmitting(true);
     setMessage("");
 
     try {
-      const slotIds = selectedSlots.map((s) => s.id);
       const payload = {
         ...details,
-        slot_ids: slotIds,
+        slot_id: selectedSlot.id,
+        service_price: details.service_price,
+        service_name: details.service_name,
       };
 
       const response = await selectedAppointmentSlot(payload);
 
-      if (response.status === "success") {
-        setSelectedSlots([]);
-        await loadCalendarSlots(false);
-        setMessage("Booking confirmed!");
-        window.dispatchEvent(new CustomEvent("bookingUpdated"));
+      if (response.status === "success" && response.url) {
+        window.location.href = response.url;
       } else {
-        setMessage(response.message || "Booking failed.");
+        setMessage(response.message || "Booking initiation failed.");
       }
     } catch (err) {
       setMessage(err.message);
@@ -215,9 +210,8 @@ function BookingCalendar() {
                         return <td key={dateIso}>-</td>;
                       }
 
-                      const isSelected = selectedSlots.some(
-                        (s) => s.id === slot.id,
-                      );
+                      const isSelected =
+                        selectedSlot && selectedSlot.id === slot.id;
 
                       return (
                         <td key={dateIso}>
@@ -247,13 +241,11 @@ function BookingCalendar() {
         </div>
       )}
 
-      {selectedSlots.length > 0 && (
+      {selectedSlot && (
         <div className="mt-3">
           <div className="alert selected-slots-alert">
-            <strong>Selected ({selectedSlots.length} slot/s):</strong>{" "}
-            {selectedSlots
-              .map((s) => `${s.date} (${s.start_time}-${s.end_time})`)
-              .join(", ")}
+            <strong>Selected slot:</strong> {selectedSlot.date} (
+            {selectedSlot.start_time}-{selectedSlot.end_time})
           </div>
           <BookingDetailsForm
             onConfirm={handleConfirmBooking}
