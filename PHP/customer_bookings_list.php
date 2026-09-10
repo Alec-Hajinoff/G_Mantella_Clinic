@@ -48,7 +48,6 @@ try {
             a.id AS appointment_id,
             a.slot_id,
             a.service_id,
-            a.vehicle_reg,
             a.notes,
             s.date,
             s.start_time,

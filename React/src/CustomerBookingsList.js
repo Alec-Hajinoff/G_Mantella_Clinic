@@ -71,12 +71,6 @@ function CustomerBookingsList() {
           </div>
         )}
 
-        {booking.vehicle_reg && (
-          <div className="booking-detail-item">
-            <strong>Vehicle Reg:</strong> {booking.vehicle_reg}
-          </div>
-        )}
-
         {booking.notes && (
           <div className="booking-detail-item">
             <strong>Notes:</strong> {booking.notes}
@@ -107,7 +101,7 @@ function CustomerBookingsList() {
       </div>
 
       <div className="bookings-section">
-        <h5 className="text-secondary mb-3">You Past Appointments</h5>
+        <h5 className="text-secondary mb-3">Your Past Appointments</h5>
         {past.length === 0 ? (
           <p className="text-muted small">No past appointments found.</p>
         ) : (
