@@ -412,7 +412,7 @@ export const customerDeleteAccount = async () => {
   }
 };
 
-// adminBookingsList() fetchs all garage bookings for Owner/Admin roles
+// adminBookingsList() fetches all clinic bookings for Owner/Admin roles
 
 export const adminBookingsList = async () => {
   try {
@@ -431,7 +431,8 @@ export const adminBookingsList = async () => {
     return data;
   } catch (error) {
     console.error("Error fetching admin bookings list:", error);
-    throw new Error("An error occurred while fetching garage bookings.");
+
+    throw new Error("An error occurred while fetching bookings.");
   }
 };
 

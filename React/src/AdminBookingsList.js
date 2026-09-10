@@ -45,7 +45,7 @@ function AdminBookingsList() {
   };
 
   if (loading) {
-    return <div className="text-muted my-3">Loading garage bookings...</div>;
+    return <div className="text-muted my-3">Loading bookings...</div>;
   }
 
   if (error) {
@@ -74,12 +74,6 @@ function AdminBookingsList() {
         {booking.service_name && (
           <div className="booking-detail-item">
             <strong>Service:</strong> {booking.service_name}
-          </div>
-        )}
-
-        {booking.vehicle_reg && (
-          <div className="booking-detail-item">
-            <strong>Vehicle Reg:</strong> {booking.vehicle_reg}
           </div>
         )}
 

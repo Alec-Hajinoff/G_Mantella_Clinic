@@ -49,7 +49,8 @@ if ($user_role_id !== null) {
 }
 
 if (! $is_staff) {
-    echo json_encode(['status' => 'error', 'message' => 'Access denied. Only garage staff can view all bookings.']);
+
+    echo json_encode(['status' => 'error', 'message' => 'Access denied. Only clinic staff can view all bookings.']);
     exit;
 }
 
@@ -66,7 +67,6 @@ try {
     $stmt = $pdo->prepare('
         SELECT
             a.id AS appointment_id,
-            a.vehicle_reg,
             a.notes,
             a.created_at AS booked_at,
             s.id AS slot_id,
