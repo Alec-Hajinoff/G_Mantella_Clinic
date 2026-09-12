@@ -82,6 +82,8 @@ $first_name = isset($input['first_name']) ? trim($input['first_name']) : '';
 $surname    = isset($input['surname']) ? trim($input['surname']) : '';
 $phone      = isset($input['phone']) ? trim($input['phone']) : '';
 
+$consent_answers = isset($input['consent_answers']) && is_array($input['consent_answers']) ? $input['consent_answers'] : [];
+
 if (empty($first_name) || empty($surname) || empty($phone)) {
     echo json_encode(['status' => 'error', 'message' => 'First name, surname, and phone number are required.']);
     exit;
@@ -134,18 +136,19 @@ try {
     $slot_description = "{$formatted_date} - {$formatted_start} to {$formatted_end}";
 
     $metadata = [
-        'user_id'       => (string) $user_id,
-        'slot_id'       => (string) $slot_id,
-        'service_id'    => (string) ($service_id ?? ''),
-        'service_name'  => $service_name,
-        'first_name'    => $first_name,
-        'surname'       => $surname,
-        'phone'         => $phone,
-        'booking_notes' => $notes ?? '',
-        'slot_date'     => $slot_data['date'],
-        'slot_start'    => $slot_data['start_time'],
-        'slot_end'      => $slot_data['end_time'],
+        'user_id'         => (string) $user_id,
+        'slot_id'         => (string) $slot_id,
+        'service_id'      => (string) ($service_id ?? ''),
+        'service_name'    => $service_name,
+        'first_name'      => $first_name,
+        'surname'         => $surname,
+        'phone'           => $phone,
+        'booking_notes'   => $notes ?? '',
+        'slot_date'       => $slot_data['date'],
+        'slot_start'      => $slot_data['start_time'],
+        'slot_end'        => $slot_data['end_time'],
 
+        'consent_answers' => json_encode($consent_answers),
     ];
 
     $ngrok_domain = $config['NGROK_DOMAIN'] ?? 'https://impulsive-spirits-overpay.ngrok-free.dev';
