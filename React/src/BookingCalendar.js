@@ -112,6 +112,7 @@ function BookingCalendar() {
         slot_id: selectedSlot.id,
         service_price: details.service_price,
         service_name: details.service_name,
+        consent_answers: details.consent_answers,
       };
 
       const response = await selectedAppointmentSlot(payload);
