@@ -101,6 +101,9 @@ if ($event_type === 'checkout.session.completed') {
             $booking_notes = $metadata['booking_notes'] ?? null;
             $service_name  = $metadata['service_name'] ?? 'Not Specified';
 
+            $consent_answers_json = $metadata['consent_answers'] ?? '[]';
+            $consent_answers      = json_decode($consent_answers_json, true);
+
             if (! $slot_id) {
                 throw new Exception('Missing slot_id in webhook metadata');
             }
@@ -143,6 +146,28 @@ if ($event_type === 'checkout.session.completed') {
                 ':service_id' => $service_id,
                 ':notes'      => $booking_notes,
             ]);
+            $appointment_id = $pdo->lastInsertId();
+
+            $form_stmt = $pdo->prepare('
+                INSERT INTO consent_forms (user_id, appointment_id, submitted_at, status, created_at, updated_at)
+                VALUES (?, ?, NOW(), "submitted", NOW(), NOW())
+            ');
+            $form_stmt->execute([$user_id, $appointment_id]);
+            $consent_form_id = $pdo->lastInsertId();
+
+            if (! empty($consent_answers) && is_array($consent_answers)) {
+                $answer_stmt = $pdo->prepare('
+                    INSERT INTO consent_answers (consent_form_id, question_id, answer, created_at, updated_at)
+                    VALUES (?, ?, ?, NOW(), NOW())
+                ');
+                foreach ($consent_answers as $ans) {
+                    $q_id  = $ans['question_id'] ?? null;
+                    $a_val = isset($ans['answer']) ? (int) $ans['answer'] : 0;
+                    if ($q_id) {
+                        $answer_stmt->execute([$consent_form_id, $q_id, $a_val]);
+                    }
+                }
+            }
 
             $mailUsername = $config['MAIL_USERNAME'] ?? '';
             $mailPassword = $config['MAIL_PASSWORD'] ?? '';
@@ -152,6 +177,25 @@ if ($event_type === 'checkout.session.completed') {
                 $slot_stmt = $pdo->prepare('SELECT date, start_time, end_time FROM availability_slots WHERE id = ?');
                 $slot_stmt->execute([$slot_id]);
                 $slot_data = $slot_stmt->fetch();
+
+                $consent_summary_text = "";
+                if (! empty($consent_answers)) {
+                    $q_ids = array_column($consent_answers, 'question_id');
+                    if (! empty($q_ids)) {
+                        $placeholders = implode(',', array_fill(0, count($q_ids), '?'));
+                        $q_stmt       = $pdo->prepare("SELECT id, question FROM consent_questions WHERE id IN ($placeholders)");
+                        $q_stmt->execute($q_ids);
+                        $questions_map = $q_stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+                        $consent_summary_text = "\n--- CONSENT FORM ANSWERS ---\n";
+                        foreach ($consent_answers as $ans) {
+                            $q_id                  = $ans['question_id'] ?? null;
+                            $a_val                 = ($ans['answer'] ?? 0) == 1 ? 'Yes' : 'No';
+                            $q_text                = $questions_map[$q_id] ?? 'Question ID ' . $q_id;
+                            $consent_summary_text .= "• {$q_text}: {$a_val}\n";
+                        }
+                    }
+                }
 
                 $staff_stmt = $pdo->prepare('
                     SELECT email FROM users
@@ -190,7 +234,8 @@ if ($event_type === 'checkout.session.completed') {
                     . "Service: {$service_name}\n"
                     . "Date: {$formatted_date}\n"
                     . "Time: {$formatted_start} - {$formatted_end}\n"
-                    . "Notes: " . ($booking_notes ? $booking_notes : 'None') . "\n\n"
+                    . "Notes: " . ($booking_notes ? $booking_notes : 'None') . "\n"
+                    . $consent_summary_text . "\n"
                     . "Payment Status: PAID - £" . number_format($amount_total / 100, 2) . " " . strtoupper($currency);
 
                     $mail->send();
