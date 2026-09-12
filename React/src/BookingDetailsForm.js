@@ -13,6 +13,9 @@ function BookingDetailsForm({ onConfirm, submitting }) {
   const [surname, setSurname] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [consentQuestions, setConsentQuestions] = useState([]);
+  const [consentAnswers, setConsentAnswers] = useState({});
+
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -21,6 +24,8 @@ function BookingDetailsForm({ onConfirm, submitting }) {
         const response = await bookingDetailsForm();
         if (response.status === "success") {
           setServices(response.services);
+
+          setConsentQuestions(response.consent_questions || []);
 
           if (response.user) {
             setFirstName(response.user.first_name || "");
@@ -44,6 +49,13 @@ function BookingDetailsForm({ onConfirm, submitting }) {
     } else {
       setSelectedService(null);
     }
+  };
+
+  const handleConsentChange = (questionId, value) => {
+    setConsentAnswers((prev) => ({
+      ...prev,
+      [questionId]: parseInt(value, 10),
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -72,6 +84,20 @@ function BookingDetailsForm({ onConfirm, submitting }) {
       return;
     }
 
+    for (const q of consentQuestions) {
+      if (consentAnswers[q.id] === undefined) {
+        setErrorMessage(
+          `Please answer all required consent questions: "${q.question}"`,
+        );
+        return;
+      }
+    }
+
+    const consentAnswersPayload = consentQuestions.map((q) => ({
+      question_id: q.id,
+      answer: consentAnswers[q.id],
+    }));
+
     const payload = {
       service_id: serviceId ? parseInt(serviceId, 10) : null,
       service_name: selectedService ? selectedService.name : null,
@@ -83,6 +109,8 @@ function BookingDetailsForm({ onConfirm, submitting }) {
       first_name: firstName.trim(),
       surname: surname.trim(),
       phone: phone.trim(),
+
+      consent_answers: consentAnswersPayload,
     };
 
     onConfirm(payload);
@@ -187,6 +215,58 @@ function BookingDetailsForm({ onConfirm, submitting }) {
           required
         />
       </div>
+
+      {consentQuestions.length > 0 && (
+        <div className="booking-form-group mt-4">
+          <label className="form-label fw-bold d-block mb-3">
+            Consent & Medical History Questions{" "}
+            <span className="text-danger">*</span>
+          </label>
+          {consentQuestions.map((q) => (
+            <div key={q.id} className="mb-3 p-3 border bg-white rounded">
+              <label className="form-label d-block fw-semibold mb-2">
+                {q.question} <span className="text-danger">*</span>
+              </label>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name={`consent_question_${q.id}`}
+                  id={`consent_${q.id}_yes`}
+                  value="1"
+                  checked={consentAnswers[q.id] === 1}
+                  onChange={(e) => handleConsentChange(q.id, e.target.value)}
+                  required
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor={`consent_${q.id}_yes`}
+                >
+                  Yes
+                </label>
+              </div>
+              <div className="form-check form-check-inline">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name={`consent_question_${q.id}`}
+                  id={`consent_${q.id}_no`}
+                  value="0"
+                  checked={consentAnswers[q.id] === 0}
+                  onChange={(e) => handleConsentChange(q.id, e.target.value)}
+                  required
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor={`consent_${q.id}_no`}
+                >
+                  No
+                </label>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       <button
         type="submit"

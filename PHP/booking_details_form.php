@@ -50,14 +50,19 @@ try {
     $user_stmt->execute([':user_id' => $user_id]);
     $user_data = $user_stmt->fetch();
 
+    $consent_stmt      = $pdo->query('SELECT id, question, required, display_order FROM consent_questions WHERE active = 1 ORDER BY display_order ASC');
+    $consent_questions = $consent_stmt->fetchAll();
+
     echo json_encode([
-        'status'   => 'success',
-        'services' => $services,
-        'user'     => $user_data ?: [
+        'status'            => 'success',
+        'services'          => $services,
+        'user'              => $user_data ?: [
             'first_name' => '',
             'surname'    => '',
             'phone'      => '',
         ],
+
+        'consent_questions' => $consent_questions,
     ]);
 
 } catch (PDOException $e) {
