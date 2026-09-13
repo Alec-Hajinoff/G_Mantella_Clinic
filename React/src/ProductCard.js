@@ -19,7 +19,7 @@ function ProductCard({ product }) {
   const getImageSrc = (imagePath) => {
     if (!imagePath) return null;
     const filename = imagePath.split("\\").pop().split("/").pop();
-    return `http://localhost/Loveday_Auto/PHP/Images/${filename}`;
+    return `http://localhost/G_Mantella_Clinic/PHP/Images/${filename}`;
   };
 
   const imageSrc = getImageSrc(product.image_url);
