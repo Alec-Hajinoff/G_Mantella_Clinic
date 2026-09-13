@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { productCatalogueGet } from "./ApiService";
 import ProductCard from "./ProductCard";
 
-function ShopPage({ selectedProducts, onClearSelection }) {
+function ShopPage({ selectedProducts = null, onClearSelection = () => {} }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const isFilteredMode = selectedProducts !== null;
+  const isFilteredMode = Array.isArray(selectedProducts);
 
   const displayProducts = isFilteredMode ? selectedProducts : products;
 
