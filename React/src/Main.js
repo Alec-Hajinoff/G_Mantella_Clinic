@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HeroSection from "./HeroSection";
 import ShopPage from "./ShopPage";
 import BookingCallToAction from "./BookingCallToAction";
@@ -7,6 +7,8 @@ import OverlayMap from "./OverlayMap";
 import "./Main.css";
 
 function Main({ isAuthenticated, userRole, isLoading }) {
+  const [selectedProducts, setSelectedProducts] = useState(null);
+
   return (
     <div className="overflow-hidden">
       <div>
@@ -30,11 +32,14 @@ function Main({ isAuthenticated, userRole, isLoading }) {
               </section>
 
               <div className="intro-section">
-                <ShopPage />
+                <ShopPage
+                  selectedProducts={selectedProducts}
+                  onClearSelection={() => setSelectedProducts(null)}
+                />
               </div>
 
               <div className="intro-section">
-                <OverlayMap />
+                <OverlayMap onHotspotSelect={setSelectedProducts} />
               </div>
             </div>
           </div>

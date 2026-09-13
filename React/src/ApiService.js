@@ -621,3 +621,30 @@ export const checkoutSessionCreate = async (checkoutPayload) => {
     throw new Error("An error occurred while initiating payment.");
   }
 };
+
+// overlayMap() fetches all products associated with a given SVG hotspot key. It's a POST because we are sending svg_key in the body.
+
+export const overlayMap = async (svgKey) => {
+  try {
+    const response = await fetch(
+      "http://localhost:8001/G_Mantella_Clinic/PHP/overlay_map.php",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ svg_key: svgKey }),
+      },
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("overlayMap error:", error);
+    return {
+      status: "error",
+      message: "An error occurred while fetching hotspot products.",
+    };
+  }
+};

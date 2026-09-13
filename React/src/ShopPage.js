@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import { productCatalogueGet } from "./ApiService";
 import ProductCard from "./ProductCard";
 
-function ShopPage() {
+function ShopPage({ selectedProducts, onClearSelection }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const isFilteredMode = selectedProducts !== null;
+
+  const displayProducts = isFilteredMode ? selectedProducts : products;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,7 +30,7 @@ function ShopPage() {
     fetchProducts();
   }, []);
 
-  if (loading) {
+  if (loading && !isFilteredMode) {
     return (
       <div className="container text-center my-5 py-5">
         <div className="spinner-border text-primary" role="status">
@@ -36,7 +40,7 @@ function ShopPage() {
     );
   }
 
-  if (error) {
+  if (error && !isFilteredMode) {
     return (
       <div className="container my-5">
         <div className="alert alert-danger">{error}</div>
@@ -46,13 +50,30 @@ function ShopPage() {
 
   return (
     <div className="container my-4">
-      <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        {products.map((product) => (
-          <div className="col" key={product.id}>
-            <ProductCard product={product} />
-          </div>
-        ))}
-      </div>
+      {isFilteredMode && (
+        <div className="mb-4">
+          <button
+            className="btn btn-outline-primary"
+            onClick={onClearSelection}
+          >
+            ← Show All Products
+          </button>
+        </div>
+      )}
+
+      {isFilteredMode && displayProducts.length === 0 ? (
+        <div className="alert alert-info text-center">
+          No products available for this placement yet. Please check back soon.
+        </div>
+      ) : (
+        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+          {displayProducts.map((product) => (
+            <div className="col" key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
