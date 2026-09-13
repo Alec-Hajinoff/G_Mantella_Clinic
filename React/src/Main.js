@@ -2,6 +2,7 @@ import React from "react";
 import HeroSection from "./HeroSection";
 import ShopPage from "./ShopPage";
 import BookingCallToAction from "./BookingCallToAction";
+import OverlayMap from "./OverlayMap";
 
 import "./Main.css";
 
@@ -30,6 +31,10 @@ function Main({ isAuthenticated, userRole, isLoading }) {
 
               <div className="intro-section">
                 <ShopPage />
+              </div>
+
+              <div className="intro-section">
+                <OverlayMap />
               </div>
             </div>
           </div>

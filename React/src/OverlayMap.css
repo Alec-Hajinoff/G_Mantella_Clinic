@@ -1,0 +1,33 @@
+.overlay-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 690px;
+  margin: 0 auto;
+  aspect-ratio: 690 / 635;
+}
+
+.overlay-map-image,
+.overlay-map-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay-map-image {
+  z-index: 1;
+}
+
+.overlay-map-svg {
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hotspot {
+  fill: transparent;
+  stroke: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: fill 0.2s ease-in-out;
+}
