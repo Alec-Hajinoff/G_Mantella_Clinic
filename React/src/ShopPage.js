@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { productCatalogueGet } from "./ApiService";
 import ProductCard from "./ProductCard";
 
-function ShopPage({ selectedProducts = null, onClearSelection = () => {} }) {
+function ShopPage({
+  selectedProducts = null,
+  onClearSelection = () => {},
+  layout = "full",
+}) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,6 +14,11 @@ function ShopPage({ selectedProducts = null, onClearSelection = () => {} }) {
   const isFilteredMode = Array.isArray(selectedProducts);
 
   const displayProducts = isFilteredMode ? selectedProducts : products;
+
+  const gridClasses =
+    layout === "embedded"
+      ? "row row-cols-1 row-cols-sm-2 row-cols-lg-2 g-4"
+      : "row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4";
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -66,7 +75,7 @@ function ShopPage({ selectedProducts = null, onClearSelection = () => {} }) {
           No products available for this placement yet. Please check back soon.
         </div>
       ) : (
-        <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        <div className={gridClasses}>
           {displayProducts.map((product) => (
             <div className="col" key={product.id}>
               <ProductCard product={product} />

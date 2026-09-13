@@ -31,15 +31,22 @@ function Main({ isAuthenticated, userRole, isLoading }) {
                 <h2 className="hero-title">Our Products</h2>
               </section>
 
-              <div className="intro-section">
-                <ShopPage
-                  selectedProducts={selectedProducts}
-                  onClearSelection={() => setSelectedProducts(null)}
-                />
-              </div>
+              <div className="row align-items-start">
+                <div className="col-12 col-md-6">
+                  <div className="intro-section">
+                    <OverlayMap onHotspotSelect={setSelectedProducts} />
+                  </div>
+                </div>
 
-              <div className="intro-section">
-                <OverlayMap onHotspotSelect={setSelectedProducts} />
+                <div className="col-12 col-md-6">
+                  <div className="intro-section">
+                    <ShopPage
+                      selectedProducts={selectedProducts}
+                      onClearSelection={() => setSelectedProducts(null)}
+                      layout="embedded"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
